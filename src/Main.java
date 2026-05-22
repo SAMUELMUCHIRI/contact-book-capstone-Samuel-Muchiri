@@ -48,6 +48,23 @@ void main() {
     myContactBook.listAllContacts();
 
     //Final Count
-    System.out.println("The Final ContactBook List Count is: " + myContactBook.countContacts());;
+    System.out.println("\nThe Final ContactBook List Count is: " + myContactBook.countContacts());
+
+    System.out.println("\nSearching Amara");
+    Optional<ArrayList<Contact>> findContact = myContactBook.searchContacts("amara");
+    if (findContact.isPresent()) {
+        for (Contact contact : findContact.get()) {
+            System.out.println(contact.toString());
+        }
+    }
+
+    System.out.println("\nSorting By last name\n");
+    myContactBook.sortByLastName();
+
+    System.out.println("\nFinding by phone Number\n");
+    System.out.println("Valid phoneNumber\n");
+    myContactBook.findByPhone("0790123456");
+    System.out.println("\nInvalid PhoneNumber\n");
+    myContactBook.findByPhone("43757866837");
 
 }

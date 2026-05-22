@@ -30,6 +30,11 @@ public class Contact {
         return firstName+lastName;
     }
 
+    public String getFullDetails()
+    {
+        return firstName+" "+lastName+" "+email;
+    }
+
     //Setters
     public void setFirstName(String firstName)
     {
@@ -71,11 +76,15 @@ public class Contact {
             throw new IllegalArgumentException("Enter a valid email !");
         }
         String trimmed = email.trim();
+        this.email = isValidEmail(trimmed) ;
+    }
 
-        if (!trimmed.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+    public String isValidEmail(String email)
+    {
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
             throw new IllegalArgumentException("Enter a valid email !");
         }
-        this.email = trimmed ;
+        return email ;
     }
 
     public String toString()
