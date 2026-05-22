@@ -21,6 +21,7 @@ void main() {
             {"Yuki",   "Tanaka",    "0701234567", "yuki.tanaka@work.com"},
             {"Kwame",  "Asante",    "0712345670", "kwame123email.com"},
             {"Elena",  "Petrov",    "0723456780", "elena.petrov@gmail.com"},
+            {"Elena",  "Petrov",    "0723456780", "elena.petrov@gmail.com"},
             {"Omar",   "Farouk",    "0734567891", "omar.farouk@work.com"},
             {"Zara",   "Osei",      "0745678902", "zara.osei@"}
     };
@@ -39,12 +40,15 @@ void main() {
     myContactBook.listAllContacts();
 
     //Removing "Omar",   "Farouk
+    System.out.println("\nRemoving Omar Farouk");
     myContactBook.removeContact("OmarFarouk");
 
     //Confirm Removed Contact
+    System.out.println("\nConfirm Removed Contact Omar Farouk");
     myContactBook.findContact("OmarFarouk");
 
     //list Remaining contacts
+    System.out.println("\nlist Remaining contacts");
     myContactBook.listAllContacts();
 
     //Final Count
@@ -61,10 +65,8 @@ void main() {
     System.out.println("\nSorting By last name\n");
     myContactBook.sortByLastName();
 
-    System.out.println("\nFinding by phone Number\n");
-    System.out.println("Valid phoneNumber\n");
+    System.out.println("\nFinding by phone Number");
     myContactBook.findByPhone("0790123456");
-    System.out.println("\nInvalid PhoneNumber\n");
     myContactBook.findByPhone("43757866837");
 
 }

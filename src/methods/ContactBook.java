@@ -1,11 +1,9 @@
 package methods;
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.Optional;
-import java.util.HashMap;
+import java.util.*;
 
 public class ContactBook {
-    private ArrayList<Contact> contactBookArrayList = new ArrayList<Contact>();
+    // Changed to Haspmap
+    private Map<String, Contact> contactsByPhone = new  HashMap<>();
     public ContactBook()
     {
         System.out.println("\nInitialized the contact book");
@@ -15,24 +13,33 @@ public class ContactBook {
     {
         try
         {
-            contactBookArrayList.add(c);
-            System.out.println("[SUCCESS]\t: Contact added Successfully");
+            //Warm on duplicate entry
+           if(contactsByPhone.containsKey(c.getPhoneNumber()))
+            {
+                System.out.println("[WARN]\t: Contact already exists");
+            }
+           else {
+               //Modify to fit hash map formart
+               contactsByPhone.put(c.getPhoneNumber() , c);
+               System.out.println("[SUCCESS]\t: Contact added Successfully");
+
+           }
         }
         catch (Exception e) {
             System.out.println("[ERROR]\t: "+e.toString());
       }
     }
-
+    // I had left out an unused variable "NospaceFullName" and compared using lowercase
     public void findContact(String fullName)
     {
         if (fullName == null) {
             throw new IllegalArgumentException("Enter a valid FullName !");
         }
-        String noSpaceFullName = fullName.replaceAll("\\s", "");
+        String noSpaceFullName = fullName.replaceAll("\\s", "").toLowerCase();
         int count = 0;
-        for(Contact C : contactBookArrayList)
+        for(Contact C : contactsByPhone.values() )
         {
-            if(fullName.equals(C.getFullName()) )
+            if(noSpaceFullName.equals(C.getFullName().toLowerCase()) )
             {
                 count++;
                 C.toString();
@@ -52,33 +59,23 @@ public class ContactBook {
         }
         String noSpaceFullName = fullName.replaceAll("\\s", "");
         int count = 0;
-        for(int i = 0 ; i < contactBookArrayList.size() ; i++ )
-        {
-            if(fullName.equals(contactBookArrayList.get(i).getFullName()) )
-            {
-                count++;
-                contactBookArrayList.remove(i);
-                System.out.println("\n[SUCCESS]\t: Contact "+ fullName +" removed Successfully");
-            }
-        }
-        if(count == 0)
-        {
-            System.out.println("\nContact not found");
-        }
-
+        // AI suggested to use mapping
+        contactsByPhone.entrySet().removeIf(entry -> entry.getValue().getFullName().equals(noSpaceFullName));
 
     }
 
     public void listAllContacts()
     {
-        if(contactBookArrayList.isEmpty())
+        if(contactsByPhone.isEmpty())
         {
             System.out.println("\nNo contacts saved");
         }
         else {
-            for(int i = 0 ; i < contactBookArrayList.size() ; i++ )
+            int count = 0;
+            for(    Contact C:  contactsByPhone.values() )
             {
-                System.out.println("[ "+i+" ]"+contactBookArrayList.get(i).toString());
+                System.out.println("[ "+count+" ]"+C.toString());
+                count++;
 
             }
         }
@@ -86,14 +83,14 @@ public class ContactBook {
 
     public int countContacts()
     {
-        return contactBookArrayList.size();
+        return contactsByPhone.size();
     }
 
     public Optional<ArrayList<Contact>> searchContacts(String keyword)
     {
         ArrayList<Contact> foundContacts = new ArrayList<>();
         String smallKeyword = keyword.toLowerCase();
-        for(Contact c: contactBookArrayList)
+        for(Contact c: contactsByPhone.values())
         {
             if(c.getFullDetails().toLowerCase().contains(smallKeyword))
             {
@@ -110,16 +107,20 @@ public class ContactBook {
 
     public void sortByLastName()
     {
+        //direct conversion to tree map instead of looping through
         TreeMap<String , Contact> contactSortedByLastName= new TreeMap<>();
-        if(contactBookArrayList.isEmpty())
+        if(contactsByPhone.isEmpty())
         {
             System.out.println("\nNo contacts saved");
         }
+
+
         else {
-            for(Contact c : contactBookArrayList)
+            for(Contact C : contactsByPhone.values())
             {
-                contactSortedByLastName.put(c.getLastName() , c);
+                contactSortedByLastName.put(C.getLastName(),C);
             }
+
             int count = 0;
             for(Contact c : contactSortedByLastName.values() )
             {
@@ -134,18 +135,13 @@ public class ContactBook {
 
     public void findByPhone(String phoneNumber)
     {
-        HashMap<String , Contact> contactOrderByPhone = new HashMap<>();
-        for(Contact C : contactBookArrayList)
+        //O(1) LOOKUP
+        Contact findContact =contactsByPhone.get(phoneNumber);
+        if(findContact != null)
         {
-            contactOrderByPhone.put(C.getPhoneNumber() , C);
+            System.out.println(findContact.toString());
         }
-
-        if(contactOrderByPhone.get(phoneNumber) != null)
-        {
-            System.out.println(contactOrderByPhone.get(phoneNumber).toString());
-        }
-        else
-        {
+        else        {
             System.out.println("No contact found with that number :\t"+phoneNumber);
         }
 
