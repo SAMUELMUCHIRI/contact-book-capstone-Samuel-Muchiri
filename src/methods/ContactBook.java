@@ -5,7 +5,7 @@ public class ContactBook {
     private ArrayList<Contact> contactBookArrayList = new ArrayList<Contact>();
     public ContactBook()
     {
-        System.out.println("Initialized the contact book");
+        System.out.println("\nInitialized the contact book");
     }
 
     public void addContact(Contact c)
@@ -55,12 +55,12 @@ public class ContactBook {
             {
                 count++;
                 contactBookArrayList.remove(i);
-                System.out.println("[SUCCESS]\t: Contact "+ fullName +" removed Successfully");
+                System.out.println("\n[SUCCESS]\t: Contact "+ fullName +" removed Successfully");
             }
         }
         if(count == 0)
         {
-            System.out.println("Contact not found");
+            System.out.println("\nContact not found");
         }
 
 
@@ -70,7 +70,7 @@ public class ContactBook {
     {
         if(contactBookArrayList.isEmpty())
         {
-            System.out.println("No contacts saved");
+            System.out.println("\nNo contacts saved");
         }
         else {
             for(int i = 0 ; i < contactBookArrayList.size() ; i++ )

@@ -4,6 +4,9 @@ void main() {
 
     ContactBook myContactBook= new ContactBook();
 
+    //Listing empty contact book
+    myContactBook.listAllContacts();
+
     String[][] contacts = {
             {"Sarah",  "Okonkwo",   "0712345678", "sarah.o@email.com"},
             {"James",  "Mwangi",    "0798765432", "j.mwangi@gmail.com"},
