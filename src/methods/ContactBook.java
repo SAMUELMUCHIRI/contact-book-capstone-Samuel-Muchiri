@@ -35,14 +35,14 @@ public class ContactBook {
         if (fullName == null) {
             throw new IllegalArgumentException("Enter a valid FullName !");
         }
-        String noSpaceFullName = fullName.replaceAll("\\s", "").toLowerCase();
+        String lowerCaseFullName = fullName.toLowerCase();
         int count = 0;
-        for(Contact C : contactsByPhone.values() )
+        for(Contact c : contactsByPhone.values() )
         {
-            if(noSpaceFullName.equals(C.getFullName().toLowerCase()) )
+            if(lowerCaseFullName.equals(c.getFullName().toLowerCase()) )
             {
                 count++;
-                C.toString();
+                System.out.println(c.toString());
             }
         }
         if(count == 0)
@@ -57,10 +57,10 @@ public class ContactBook {
         if (fullName == null) {
             throw new IllegalArgumentException("Enter a valid FullName !");
         }
-        String noSpaceFullName = fullName.replaceAll("\\s", "");
-        int count = 0;
+
+
         // AI suggested to use mapping
-        contactsByPhone.entrySet().removeIf(entry -> entry.getValue().getFullName().equals(noSpaceFullName));
+        contactsByPhone.entrySet().removeIf(entry -> entry.getValue().getFullName().equals(fullName));
 
     }
 
@@ -72,9 +72,9 @@ public class ContactBook {
         }
         else {
             int count = 0;
-            for(    Contact C:  contactsByPhone.values() )
+            for(    Contact c:  contactsByPhone.values() )
             {
-                System.out.println("[ "+count+" ]"+C.toString());
+                System.out.println("[ "+count+" ]"+c.toString());
                 count++;
 
             }
@@ -116,9 +116,9 @@ public class ContactBook {
 
 
         else {
-            for(Contact C : contactsByPhone.values())
+            for(Contact c : contactsByPhone.values())
             {
-                contactSortedByLastName.put(C.getLastName(),C);
+                contactSortedByLastName.put(c.getLastName(),c);
             }
 
             int count = 0;

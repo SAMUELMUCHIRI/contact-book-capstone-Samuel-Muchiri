@@ -39,13 +39,16 @@ void main() {
     //Listing successfully added contacts
     myContactBook.listAllContacts();
 
+    System.out.println("\nFind Contact Omar Farouk");
+    myContactBook.findContact("Omar Farouk");
+
     //Removing "Omar",   "Farouk
     System.out.println("\nRemoving Omar Farouk");
-    myContactBook.removeContact("OmarFarouk");
+    myContactBook.removeContact("Omar Farouk");
 
     //Confirm Removed Contact
     System.out.println("\nConfirm Removed Contact Omar Farouk");
-    myContactBook.findContact("OmarFarouk");
+    myContactBook.findContact("Omar Farouk");
 
     //list Remaining contacts
     System.out.println("\nlist Remaining contacts");
